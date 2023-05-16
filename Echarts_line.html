@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECharts</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.2/echarts.min.js" integrity="sha512-VdqgeoWrVJcsDXFlQEKqE5MyhaIgB9yXUVaiUa8DR2J4Lr1uWcFm+ZH/YnzV5WqgKf4GPyHQ64vVLgzqGIchyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+  <div id="chart" style = "width:800px; height: 400px;"></div>
+  <script>
+    // 準備好的DOM
+    var myChart = echarts.init(document.getElementById("chart"));
+    // 圖表設定與資料
+    var option = {
+        title:{
+            text : "蔬果交易重量與利潤表",
+        },
+        tooltip:{
+            trigger:"axis",
+        }, 
+        legend : {
+            data:["銷量","利潤"],
+        }, 
+        xAxis: {
+            type :"category", 
+            data :["1","2","3","4","5","6","7"],
+            name:"月份"
+        }, 
+        yAxis :{
+            type:"value",
+            name:"數值(十萬)" 
+        }, 
+        series:[{
+            name:"銷量", 
+            type:"line", 
+            data:[5,20, 36,10, 10, 20 , 10],
+        },{
+            name:"利潤", 
+            type:"line", 
+            data:[3,10, 25,5, 8, 15 , 8]
+        }],
+        
+    };
+    myChart.setOption(option);
+  </script>
+</body>
+</html>

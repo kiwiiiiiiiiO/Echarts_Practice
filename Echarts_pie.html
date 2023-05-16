@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECharts</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.2/echarts.min.js" integrity="sha512-VdqgeoWrVJcsDXFlQEKqE5MyhaIgB9yXUVaiUa8DR2J4Lr1uWcFm+ZH/YnzV5WqgKf4GPyHQ64vVLgzqGIchyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+  <div id="chart" style = "width:800px; height: 400px;"></div>
+  <script>
+    // 準備好的DOM
+    var myChart = echarts.init(document.getElementById("chart"));
+    // 圖表設定與資料
+    var option = {
+        title:{
+            text : "某訊息得知管道調查",
+        },
+        tooltip:{
+            trigger:"item",
+            formatter : "{a} <br/> {b}: {c} ({d}%)",
+            // a,  ,b, c, d 有特殊對應名稱
+            // a = 資料所屬系列名稱
+            // b = 資料項的名稱
+            // c = 資料項的數值 
+            // d = 資料項的佔比 
+        }, 
+        legend : {
+            orient:"vertical",
+            left:10, 
+            top:30, 
+            data:["Facebook","Instagram","Youtube","PTT","Dcard"],
+        },
+        series:[{
+            name:"訪問來源", 
+            type:"pie", 
+            radius:["40%", "70%"], // 內半徑、外半徑 ->甜甜圈
+            label:{
+                show:false, 
+                position:"center",
+            },
+            // spootlight -> 選取項目 name出現在中間
+            emphasis:{
+                label:{
+                    show:true,
+                    fontSize:"25px", 
+                    fontWeight:"bold", 
+                }
+            },
+            data:[
+                {value: 108, name:"Facebook"}, 
+                {value: 109, name:"Instagram"}, 
+                {value: 406, name:"Youtube"}, 
+                {value: 39, name:"PTT"},
+                {value: 34, name:"Dcard"}
+            ]
+        }],
+    };
+    myChart.setOption(option);
+  </script>
+</body>
+</html>

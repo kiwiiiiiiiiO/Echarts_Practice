@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.2/echarts.min.js" integrity="sha512-VdqgeoWrVJcsDXFlQEKqE5MyhaIgB9yXUVaiUa8DR2J4Lr1uWcFm+ZH/YnzV5WqgKf4GPyHQ64vVLgzqGIchyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+  <div id="chart" style = "width:800px; height: 400px;"></div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script>
+   var url="https://dummyjson.com/products";
+    //    1. 宣告一個陣列
+   var newDataArray =[];
+   var titles=[];
+   var prices=[];
+   fetch(url,{
+        method:"GET",
+    }).then(response=>{
+        return response.json();
+    }).then(json =>{
+    //    2. 利用foreach 循環每筆資料
+    for(var i in json.products){
+        newDataArray.push(json.products[i]);
+        if(i==4) break;
+    }
+    // json.products.forEach(element=> {
+    //  //     3. 在 foreach 內部使用 step1 宣告的陣列以 push 的方法將資料存入 
+    //     newDataArray.push(element);
+    // });
+    console.log(newDataArray);
+    titles  = newDataArray.map(item =>{
+            return item.title
+    })
+    console.log("title",titles);
+    prices = newDataArray.map(item =>{
+            return item.price
+    })
+    console.log("price",prices);
+    // 同步與非同步問題
+    // 準備好的DOM
+    var myChart = echarts.init(document.getElementById("chart"));
+    // 圖表設定與資料
+    var option = {
+        title:{
+            text : "3C產品價格",
+        },
+        tooltip:{
+            trigger:"axis",
+        }, 
+        legend : {
+            data:["價格(美元)"],
+        }, 
+        xAxis: {
+            type :"category", 
+            data :titles, 
+            name:"品名"
+        }, 
+        yAxis :{
+            type:"value",
+            name:"價格(美元)" 
+        }, 
+        series:
+        {
+            name:"data1", 
+            type:"bar", 
+            data:prices,
+        }
+    };
+
+    myChart.setOption(option);
+   }).catch(error =>{
+     console.log(error);
+   })
+ 
+  </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECharts</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.2/echarts.min.js" integrity="sha512-VdqgeoWrVJcsDXFlQEKqE5MyhaIgB9yXUVaiUa8DR2J4Lr1uWcFm+ZH/YnzV5WqgKf4GPyHQ64vVLgzqGIchyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+  <div id="chart" style = "width:800px; height: 400px;"></div>
+  <script>
+    // 準備好的DOM
+    var myChart = echarts.init(document.getElementById("chart"));
+    // 圖表設定與資料
+    var option = {
+        title:{
+            text : "小明的周薪圖",
+        },
+        toolbox:{
+            feature:{
+                restore:{    // 重新整理
+                    show:true
+                },
+                dataView :{     // 動態更新
+                    show: true 
+                },
+                saveAsImage:{  
+                    show:true
+                },
+                magicType:{
+                    type:['bar','line'],
+                }
+            }
+        },
+        tooltip:{
+            trigger:"axis",
+        }, 
+         legend : {
+            data:["薪水"],
+         }, 
+        xAxis: {
+            type :"category", 
+            data :["一","二","三","四","五","六","七"],
+            name:"星期"
+        }, 
+        yAxis :{
+            type:"value",
+            name:"新台幣(元)" 
+        }, 
+        series:
+        {
+            name:"薪水", 
+            type:"bar", 
+            data:[1221,1449, 1532,1148, 1668, 2500 , 2100],
+        },
+    };
+
+    myChart.setOption(option);
+  </script>
+</body>
+</html>
